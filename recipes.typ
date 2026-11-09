@@ -1,9 +1,11 @@
 = Recipes
 
-#let recipe(el) = [
+#let recipe(el, minutes: none) = [
   // Add actual styling
-  #show heading.where(level: 2): emph
-  #el
+  #show heading.where(level: 2): it => [#emph(it) (#minutes minutes)]
+  #block(breakable: false)[
+    #el
+  ]
 ]
 
 #let ingredients(it) = [
@@ -33,7 +35,9 @@
   #it
 ]
 
-#recipe[
+#recipe(
+  minutes: 40,
+)[
   == Fried Mee Noodles with Soy Sauce
 
   { Insert picture }
