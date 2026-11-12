@@ -1,9 +1,56 @@
+#import "@preview/chic-hdr:0.5.0": *
+
+
+#let recipes-template(
+  title: "Recipes"
+) = it => [
+  // settings
+  #set text(font: "Comic Neue", size: 10pt)
+  #set page(paper: "a5")
+
+  // header / footer
+  #show: chic.with(
+    chic-footer(
+      right-side: chic-page-number()
+    ),
+    chic-header(
+      left-side: smallcaps(title)
+    ),
+    chic-separator(1pt),
+    chic-offset(15pt),
+    chic-height(2cm),
+  )
+  
+  // title page
+  #align(center + horizon)[
+    #set text(size: 3em, weight: 700)
+    #title
+  ]
+  #pagebreak()
+
+  // contents page
+
+  #align(center + horizon, 
+    block(width: 70%)[
+      #heading("Recipes")
+      #v(2em)
+      #outline(depth: 2, title: none)
+      #v(4em)
+    ]
+  )
+  #pagebreak()
+  
+  // content
+  #it
+]
+
 #let recipe(el, minutes: none) = [
   // Add actual styling
-  #show heading.where(level: 2): it => [#emph(it) (#minutes minutes)]
-  #block(breakable: false)[
-    #el
+  #show heading.where(level: 2): it => [
+    #emph(it) (#minutes minutes)
   ]
+  #el
+  #pagebreak()
 ]
 
 #let ingredients(it) = [
