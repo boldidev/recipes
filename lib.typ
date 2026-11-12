@@ -8,6 +8,12 @@
   #set text(font: "Comic Neue", size: 10pt)
   #set page(paper: "a5")
 
+  #show heading.where(level: 1): it => [
+    #set text(size: 2em)
+    #align(center + horizon, it)
+    #colbreak()
+  ]
+
   // header / footer
   #show: chic.with(
     chic-footer(
@@ -32,7 +38,9 @@
 
   #align(center + horizon, 
     block(width: 70%)[
-      #heading("Recipes")
+      #text(size: 2em)[
+        Table of Contents
+      ]
       #v(2em)
       #outline(depth: 2, title: none)
       #v(4em)
