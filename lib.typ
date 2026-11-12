@@ -49,11 +49,17 @@
   #show heading.where(level: 2): it => [
     #emph(it) (#minutes minutes)
   ]
+
+  //nonsense
+  #show regex("Peel|Chop|Slice"): set text(fill: blue) 
+  #show regex("Heat"): set text(fill: red, weight: 900, size: 1.2em) 
+  
   #el
   #pagebreak()
 ]
 
-#let ingredients(it) = [
+#let ingredients(it) = align(left, block(width: 70%, align(left)[
+  #set par(spacing: 0.5em)
   #show list: it => {
     let split_ingredient = it => {
       let (ingredient, quantity) = it.body.children
@@ -62,20 +68,25 @@
 
       (
         [#for i in ingredient { i }],
+        table.vline(stroke: 0.5pt),
         [#for q in quantity { q }],
       )
     }
 
     let elems = it.children.map(split_ingredient)
 
-    table(
-      columns: 2,
-      stroke: 1pt + color.lighten(gray, 40%),
-      inset: (right: 2em),
-      // table.header([Ingredient], [quantity]),
-      ..elems.flatten(),
+    set table(stroke: none)
+    set text(size: 8pt)
+    block(fill: gray.lighten(80%),
+      table(
+        columns: (2fr, 2fr),
+        inset: (right: 2em),
+        row-gutter: -4pt,
+        ..elems.flatten(),
+      )
     )
+    v(1em)
   }
 
   #it
-]
+]))
