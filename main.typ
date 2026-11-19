@@ -9,3 +9,4 @@
 = Recipes
 #include "recipes/mee-noodles.typ"
 #include "recipes/cordon-bleu.typ"
+#include "recipes/palak-chicken.typ"
